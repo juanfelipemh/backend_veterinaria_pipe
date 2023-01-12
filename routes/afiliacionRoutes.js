@@ -1,13 +1,14 @@
 import express from "express";
-import { crearAfiliacion, obtenerUnaSolicitudes, obtenerSolicitudes, aprobarAfiliacion } from "../controllers/afiliacionController.js";
-import { administrador, mascota, usuario, verificarUsuario } from "../middleware/autorizacionUsuario.js";
+import { crearAfiliacion, obtenerUnaSolicitudes, obtenerSolicitudes, aprobarAfiliacion, modificarAfiliacion, eliminarAfiliaciones } from "../controllers/afiliacionController.js";
+import { administrador, usuario, verificarUsuario } from "../middleware/autorizacionUsuario.js";
 
 const router = express.Router();
 
-router.get("/obtenerSolicitudes", verificarUsuario, administrador, obtenerSolicitudes);
+router.get("/obtenerSolicitudes", verificarUsuario, obtenerSolicitudes);
 router.get("/obtenerUnaSolicitud/:id", verificarUsuario, obtenerUnaSolicitudes)
 router.post("/crearAfiliacion/:id", verificarUsuario, crearAfiliacion);
 router.put("/aprobarAfiliacion/:id", verificarUsuario, administrador, aprobarAfiliacion)
-
+router.put("/modificarAfiliacion/:id", verificarUsuario, modificarAfiliacion)
+router.delete("/eliminarAfiliaciones/:id", verificarUsuario, administrador, eliminarAfiliaciones)
 
 export default router;

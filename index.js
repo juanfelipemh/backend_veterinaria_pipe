@@ -8,6 +8,7 @@ import usuarioRoutes from "./routes/usuarioRoutes.js";
 import mascotaRoutes from "./routes/mascotaRoutes.js";
 import productoRoutes from "./routes/productoRoutes.js";
 import afiliacionRoutes from "./routes/afiliacionRoutes.js";
+import buzonRoutes from "./routes/buzonRoutes.js"
 dotenv.config();
 
 
@@ -34,10 +35,11 @@ import Mascota from "./models/MascotaModel.js";
 import Usuario from "./models/UsuarioModel.js";
 import Producto from "./models/ProductoModel.js";
 import Afiliacion from "./models/AfiliacionModel.js";
+import Buzon from "./models/buzonModel.js";
 
 // NOTA: en la relacion N:N Afiliacion (Mascota, Producto), se elimina con DROP CONSTRAINT la llave foranea que se crea en Mascota y Producto pero no se elimina la columna con su identificado mas mascotaId y productoId de cada una
 
-/* (async()=>{
+/*(async()=>{
     await dbConecction.sync()
 })(); */
 
@@ -53,6 +55,7 @@ app.use("/usuarios", usuarioRoutes);
 app.use("/mascotas", mascotaRoutes);
 app.use("/productos", productoRoutes);
 app.use("/afiliacion", afiliacionRoutes);
+app.use("/buzon", buzonRoutes)
 
 
 // Sincronización base de datos
