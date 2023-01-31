@@ -4,7 +4,7 @@ import Producto from "../models/ProductoModel.js";
 export const obtenerProducto = async (req, res) => {
     try {
         const respuesta = await Producto.findAll({
-            attributes: ["UUID", "titulo", "descripcion", "precio"]
+            attributes: ["id", "UUID", "titulo", "descripcion", "precio"]
         })
         res.status(200).json(respuesta)
     } catch (error) {
@@ -23,7 +23,7 @@ export const obtenerUnProducto = async (req, res) => {
             return res.status(404).json({msg: "Producto no existe"})
         }
         const respuesta = await Producto.findOne({
-            attributes: ["UUID", "titulo", "descripcion", "precio"],
+            attributes: ["id", "UUID", "titulo", "descripcion", "precio"],
             where: {
                 id: producto.id
             }

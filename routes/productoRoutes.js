@@ -4,11 +4,11 @@ import { verificarUsuario, administrador } from "../middleware/autorizacionUsuar
 
 const router = express.Router();
 
-router.get("/obtenerProductos", obtenerProducto);
-router.get("/obtenerUnProducto/:id", obtenerUnProducto)
-router.post("/crearProducto", verificarUsuario, administrador, crearProducto);
-router.put("/actualizarProducto/:id", verificarUsuario, administrador, actualizarProducto);
-router.delete("/eliminarProducto/:id", verificarUsuario, administrador, eliminarProducto);
+router.get("/obtenerProductos", verificarUsuario, obtenerProducto);
+router.get("/obtenerUnProducto/:id", verificarUsuario, obtenerUnProducto)
+router.post("/crearProducto", verificarUsuario, crearProducto);
+router.put("/actualizarProducto/:id", verificarUsuario,  actualizarProducto);
+router.delete("/eliminarProducto/:id", verificarUsuario, eliminarProducto);
 
 
 export default router;

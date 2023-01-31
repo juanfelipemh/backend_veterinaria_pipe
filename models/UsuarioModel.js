@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import  dbConecction from "../config/Database.js";
-import generarId from "../helper/generarId.js";
+
 
 const { DataTypes } = Sequelize;
 
@@ -64,11 +64,6 @@ const Usuario = dbConecction.define("usuarios", {
         validate: {
             notEmpty: true
         }
-    },
-    token: {
-        type: DataTypes.STRING,
-        defaultValue: generarId(),
-        allowNull: true,
     },
     confirmado: {
         type: DataTypes.BOOLEAN,

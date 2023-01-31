@@ -1,6 +1,5 @@
 import Mascota from "../models/MascotaModel.js";
 import Usuario from "../models/UsuarioModel.js";
-import { Op } from "sequelize"
 
 // Valida usuario en sesión
 export const verificarUsuario = async (req, res, next) => {
@@ -19,7 +18,9 @@ export const verificarUsuario = async (req, res, next) => {
     req.usuarioId = usuario.id;
     req.rol = usuario.rol;
     next();
-};
+}; 
+
+
 
 // Rutas privadas: Solo accede el administrador
 export const administrador = async (req, res, next) => {
@@ -37,6 +38,7 @@ export const administrador = async (req, res, next) => {
     next();
 }
 
+/*
 // Se agrega esta validación para que solamente el usuario dueño de los datos personales los pueda modificar. No el administrador de la plataforma puede alterar datos que no son personales por manejo de datos. El administrador puede alterar la información desde la base de datos o puede eliminar el usuario si así lo requiere
 export const usuario = async (req, res, next) => {
     const { id } = req.params;
@@ -56,7 +58,7 @@ export const usuario = async (req, res, next) => {
     } 
     next();
 }
-
+*/
 
 export const mascota = async (req, res, next) => {    
     const mascota = await Mascota.findOne({

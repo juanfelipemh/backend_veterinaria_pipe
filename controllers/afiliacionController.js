@@ -2,14 +2,14 @@ import Producto from "../models/ProductoModel.js";
 import Mascota from "../models/MascotaModel.js";
 import Afiliacion from "../models/AfiliacionModel.js";
 import Usuario from "../models/UsuarioModel.js";
-import { Model, Op } from "sequelize";
+import { Op } from "sequelize";
 
 export const obtenerSolicitudes = async (req, res) => {
     try {
         let respuesta;
         if (req.rol === "admin") {
             respuesta = await Afiliacion.findAll({
-                attributes: ["UUID", "mascotaId", "productoId", "descripcion", "fechaRevision", "confirmado"],
+                attributes: ["id", "UUID", "mascotaId", "productoId", "descripcion", "fechaRevision", "confirmado"],
                 include: [{
                     model: Usuario,
                     attributes: ["nombre"]
@@ -17,7 +17,7 @@ export const obtenerSolicitudes = async (req, res) => {
             })
         } else {
             respuesta = await Afiliacion.findAll({
-                attributes: ["UUID", "mascotaId", "productoId", "descripcion", "fechaRevision", "confirmado"],
+                attributes: ["id", "UUID", "mascotaId", "productoId", "descripcion", "fechaRevision", "confirmado"],
                 where: {
                     usuarioId: req.usuarioId
                 },
@@ -46,7 +46,7 @@ export const obtenerUnaSolicitudes = async (req, res) => {
         let respuesta;
         if (req.rol === "admin") {
             respuesta = await Afiliacion.findOne({
-                attributes: ["UUID", "mascotaId", "productoId", "descripcion", "fechaRevision"],
+                attributes: ["id", "UUID", "mascotaId", "productoId", "descripcion", "fechaRevision"],
                 where: {
                     id: afiliacion.id
                 },
@@ -57,7 +57,7 @@ export const obtenerUnaSolicitudes = async (req, res) => {
             })
         } else {
             respuesta = await Afiliacion.findOne({
-                attributes: ["UUID", "mascotaId", "productoId", "descripcion", "fechaRevision"],
+                attributes: ["id", "UUID", "mascotaId", "productoId", "descripcion", "fechaRevision"],
                 where: {
                     [Op.and]: [{ id: afiliacion.id }, { usuarioId: req.usuarioId }]
                 },
@@ -73,6 +73,8 @@ export const obtenerUnaSolicitudes = async (req, res) => {
     }
 }
 
+
+
 export const crearAfiliacion = async (req, res) => {
     try {
         const mascota = await Mascota.findOne({
@@ -85,13 +87,14 @@ export const crearAfiliacion = async (req, res) => {
         }
 
         const { mascotaId, productoId, descripcion, fechaRevision } = req.body;
+
         const afiliacion = await Afiliacion.create({
             mascotaId: mascotaId,
             productoId: productoId,
             descripcion: descripcion,
             fechaRevision: fechaRevision,
             usuarioId: req.usuarioId
-        })
+        });
         res.status(200).json(afiliacion)
     } catch (error) {
         res.status(500).json({ msg: error.message })
@@ -145,7 +148,7 @@ export const modificarAfiliacion = async (req, res) => {
                 descripcion: descripcion,
                 fechaRevision: fechaRevision,
             }, {
-                attributes: ["UUID", "mascotaId", "productoId", "descripcion", "fechaRevision", "confirmado"],
+                attributes: ["id", "UUID", "mascotaId", "productoId", "descripcion", "fechaRevision", "confirmado"],
                 where: {    
                     id: afiliacion.id
                 }

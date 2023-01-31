@@ -1,6 +1,6 @@
 import express from "express";
 import { actualizarMascota, agregarMascotas, eliminarMascota, obtenerMascotas, obtenerUnaMascota } from "../controllers/mascotaController.js";
-import { usuario, verificarUsuario } from "../middleware/autorizacionUsuario.js";
+import { verificarUsuario } from "../middleware/autorizacionUsuario.js";
 
 const router = express.Router();
 

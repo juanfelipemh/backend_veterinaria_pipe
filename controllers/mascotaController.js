@@ -1,8 +1,6 @@
 import Mascota from "../models/MascotaModel.js";
 import Usuario from "../models/UsuarioModel.js";
 import { Op } from "sequelize";
-import { subirImagen } from "../helper/cloudinary.js";
-import fs from "fs-extra";
 
 export const obtenerMascotas = async (req, res) => {
     try {
@@ -46,7 +44,7 @@ export const obtenerUnaMascota = async (req, res) => {
         let respuesta;
         if(req.rol === "admin"){
             respuesta = await Mascota.findOne({
-                attributes: ["UUID", "nombre", "edad", "descripcion", "foto"],
+                attributes: ["id", "UUID", "nombre", "edad", "descripcion", "foto"],
                 where: {
                     id: mascota.id
                 },
@@ -57,7 +55,7 @@ export const obtenerUnaMascota = async (req, res) => {
             })
         } else {
             respuesta = await Mascota.findOne({
-                attributes: ["UUID", "nombre", "edad", "descripcion", "foto"],
+                attributes: ["id", "UUID", "nombre", "edad", "descripcion", "foto"],
                 where: {
                     [Op.and]: [{ id: mascota.id }, { usuarioId: req.usuarioId }]
                 },
