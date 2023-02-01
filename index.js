@@ -10,6 +10,7 @@ import productoRoutes from "./routes/productoRoutes.js";
 import afiliacionRoutes from "./routes/afiliacionRoutes.js";
 import buzonRoutes from "./routes/buzonRoutes.js"
 import AuthRouter from "./routes/AuthRouter.js"
+import bodyParser from "body-parser";
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
@@ -38,12 +39,13 @@ import Producto from "./models/ProductoModel.js";
 import Afiliacion from "./models/AfiliacionModel.js";
 import Buzon from "./models/buzonModel.js";
 
+
 // NOTA: en la relacion N:N Afiliacion (Mascota, Producto), se elimina con DROP CONSTRAINT la llave foranea que se crea en Mascota y Producto pero no se elimina la columna con su identificado mas mascotaId y productoId de cada una
 
 
- (async()=>{
+/* (async()=>{
     await dbConecction.sync()
-})(); 
+})(); */
 
 
 // middleware
@@ -54,6 +56,10 @@ app.use(cors({
 // app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 // Routes
 app.use(AuthRouter)
