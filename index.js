@@ -40,8 +40,8 @@ import Buzon from "./models/buzonModel.js";
 
 // NOTA: en la relacion N:N Afiliacion (Mascota, Producto), se elimina con DROP CONSTRAINT la llave foranea que se crea en Mascota y Producto pero no se elimina la columna con su identificado mas mascotaId y productoId de cada una
 
-/*
-(async()=>{
+
+/* (async()=>{
     await dbConecction.sync()
 })(); */
 
