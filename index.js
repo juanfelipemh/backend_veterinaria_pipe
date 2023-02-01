@@ -11,7 +11,7 @@ import afiliacionRoutes from "./routes/afiliacionRoutes.js";
 import buzonRoutes from "./routes/buzonRoutes.js"
 import AuthRouter from "./routes/AuthRouter.js"
 dotenv.config();
-
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
@@ -68,7 +68,7 @@ app.use(buzonRoutes)
 store.sync();
 
 // Servidor establecido
-app.listen(process.env.LOCAL_PORT, ()=> {
-    console.log("Conectado al servidor", process.env.LOCAL_PORT);
+app.listen(PORT, ()=> {
+    console.log("Conectado al servidor", PORT);
 })
 
